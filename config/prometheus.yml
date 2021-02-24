@@ -3,7 +3,13 @@ global:
   scrape_interval: 15s
 
 rule_files:
-  - "/config/prometheus.rules"
+  - "/etc/prometheus/prometheus.rules"
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - 'alertmanager:9093'
 
 scrape_configs:
   - job_name: prometheus
@@ -11,10 +17,11 @@ scrape_configs:
       - targets: ['localhost:9090']
   - job_name: 'blackbox'
     metrics_path: /probe
+    scrape_interval: 5s
     params:
       module: [http_2xx]
     file_sd_configs:
-      - files: ['/config/blackbox_targets.yml']
+      - files: ['/etc/prometheus/blackbox_targets.yml']
     relabel_configs:
       - source_labels: [__address__]
         regex: (.*)(:80)?

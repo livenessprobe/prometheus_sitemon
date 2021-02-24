@@ -32,7 +32,7 @@ type AlertManagerData struct {
 		Description string `json:"description"`
 		Summary     string `json:"summary"`
 	} `json:"commonAnnotations"`
-	ExternalURL string  `json:"externalURL"`
-	Version     string  `json:"version"`
-	GroupKey    float64 `json:"groupKey"`
+	ExternalURL string `json:"externalURL"`
+	Version     string `json:"version"`
+	GroupKey    string `json:"groupKey"`
 }

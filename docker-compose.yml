@@ -1,7 +1,8 @@
-version: '2'
+version: '3.8'
 services:
+
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:v2.25.0
     restart: always
     ports:
       - "9090:9090"
@@ -9,22 +10,22 @@ services:
       - blackbox_exporter
       - alertmanager
     volumes:
-      - "./config:/config"
-      - "./data/prometheus:/data"
-    command: -config.file=/config/prometheus.yml -storage.local.path=/data -storage.local.retention=5000h -alertmanager.url=http://alertmanager:9093
+      - "./config:/etc/prometheus"
+      - "./data/prometheus:/prometheus"
+    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+
   blackbox_exporter:
-    image: prom/blackbox-exporter
+    image: prom/blackbox-exporter:v0.18.0
     ports:
       - "9115:9115"
     dns: 8.8.8.8
     restart: always
-    ports:
-      - "9115:9115"
     volumes:
       - "./config:/config"
-    command: -config.file=/config/blackbox.yml
+    command: --config.file=/config/blackbox.yml
+
   alertmanager:
-    image: prom/alertmanager
+    image: prom/alertmanager:v0.21.0
     restart: always
     links:
       - alertlogger
@@ -32,15 +33,17 @@ services:
       - "9093:9093"
     volumes:
       - "./data/alertmanager:/data"
-      - "./config:/config"
-    command: -config.file=/config/alertmanager.yml -storage.path=/data
+      - "./config:/etc/alertmanager"
+    command: --config.file=/etc/alertmanager/alertmanager.yml --storage.path=/data
+
   flakyhost.com:
     environment:
-      - HITS_FAIL_COUNT=10
+      - HITS_FAIL_COUNT=30
     build: flakyhost
     restart: always
     ports:
       - "9567:80"
+
   reliablehost.com:
     environment:
       - HITS_FAIL_COUNT=0
@@ -48,6 +51,7 @@ services:
     restart: always
     ports:
       - "9568:80"
+
   alertlogger:
     build: alertlogger
     restart: always

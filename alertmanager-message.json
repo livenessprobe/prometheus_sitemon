@@ -1,0 +1,38 @@
+{
+  "receiver": "default-receiver",
+  "status": "firing",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "service_down",
+        "instance": "flakyhost.com",
+        "job": "blackbox",
+        "severity": "page"
+      },
+      "annotations": {
+        "description": "flakyhost.com of job blackbox has been down for more than 2 minutes.",
+        "summary": "Instance flakyhost.com down"
+      },
+      "startsAt": "2021-02-24T21:23:24.357803763Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://178664cab2b9:9090/graph?g0.expr=probe_success+%3C+1\u0026g0.tab=1",
+      "fingerprint": "906410ea6bde9c5e"
+    }
+  ],
+  "groupLabels": {},
+  "commonLabels": {
+    "alertname": "service_down",
+    "instance": "flakyhost.com",
+    "job": "blackbox",
+    "severity": "page"
+  },
+  "commonAnnotations": {
+    "description": "flakyhost.com of job blackbox has been down for more than 2 minutes.",
+    "summary": "Instance flakyhost.com down"
+  },
+  "externalURL": "http://9d3128ad735c:9093",
+  "version": "4",
+  "groupKey": "{}:{}",
+  "truncatedAlerts": 0
+}

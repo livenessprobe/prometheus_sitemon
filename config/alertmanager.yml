@@ -1,7 +1,8 @@
 global:
-  resolve_timeout: 5m
+  resolve_timeout: 5m 
 route:
   receiver: 'default-receiver'
+  group_wait: 1s
 receivers:
   - name: 'default-receiver'
     webhook_configs:
