@@ -5,7 +5,8 @@
     {
       "status": "firing",
       "labels": {
-        "alertname": "service_down",
+        "alertname": "service_down_flakyhost",
+        "another_label": "value",
         "instance": "flakyhost.com",
         "job": "blackbox",
         "severity": "page"
@@ -14,24 +15,38 @@
         "description": "flakyhost.com of job blackbox has been down for more than 2 minutes.",
         "summary": "Instance flakyhost.com down"
       },
-      "startsAt": "2021-02-24T21:23:24.357803763Z",
+      "startsAt": "2021-02-24T22:33:14.357803763Z",
       "endsAt": "0001-01-01T00:00:00Z",
-      "generatorURL": "http://178664cab2b9:9090/graph?g0.expr=probe_success+%3C+1\u0026g0.tab=1",
-      "fingerprint": "906410ea6bde9c5e"
+      "generatorURL": "http://8248b1f6fc22:9090/graph?g0.expr=probe_success%7Binstance%3D%22flakyhost.com%22%7D+%3C+1\u0026g0.tab=1",
+      "fingerprint": "c4d8fb95c73c762b"
+    },
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "service_down_localhostreliablehost",
+        "another_label": "value",
+        "instance": "localhostreliablehost.com",
+        "job": "blackbox",
+        "severity": "page"
+      },
+      "annotations": {
+        "description": "localhostreliablehost.com of job blackbox has been down for more than 2 minutes.",
+        "summary": "Instance localhostreliablehost.com down"
+      },
+      "startsAt": "2021-02-24T22:33:14.357803763Z",
+      "endsAt": "0001-01-01T00:00:00Z",
+      "generatorURL": "http://8248b1f6fc22:9090/graph?g0.expr=probe_success%7Binstance%3D%22localhostreliablehost.com%22%7D+%3C+1\u0026g0.tab=1",
+      "fingerprint": "fdc9040de39c45d7"
     }
   ],
   "groupLabels": {},
   "commonLabels": {
-    "alertname": "service_down",
-    "instance": "flakyhost.com",
+    "another_label": "value",
     "job": "blackbox",
     "severity": "page"
   },
-  "commonAnnotations": {
-    "description": "flakyhost.com of job blackbox has been down for more than 2 minutes.",
-    "summary": "Instance flakyhost.com down"
-  },
-  "externalURL": "http://9d3128ad735c:9093",
+  "commonAnnotations": {},
+  "externalURL": "http://c4ca3006bcbc:9093",
   "version": "4",
   "groupKey": "{}:{}",
   "truncatedAlerts": 0

@@ -12,7 +12,7 @@ services:
     volumes:
       - "./config:/etc/prometheus"
       - "./data/prometheus:/prometheus"
-    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus
+    command: --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --web.enable-lifecycle
 
   blackbox_exporter:
     image: prom/blackbox-exporter:v0.18.0
@@ -34,7 +34,7 @@ services:
     volumes:
       - "./data/alertmanager:/data"
       - "./config:/etc/alertmanager"
-    command: --config.file=/etc/alertmanager/alertmanager.yml --storage.path=/data
+    command: --config.file=/etc/alertmanager/alertmanager.yml --storage.path=/data --log.level=debug
 
   flakyhost.com:
     environment:

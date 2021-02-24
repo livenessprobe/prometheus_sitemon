@@ -1,12 +1,22 @@
 groups:
 - name: Site Down
   rules:
-    - alert: service_down
-      expr: probe_success < 1
+    - alert: service_down_localhostreliablehost
+      expr: probe_success{instance="localhostreliablehost.com"} < 1
       for: 15s
       labels:
         severity: page
+        another_label: value
       annotations:
         summary: "Instance {{ $labels.instance }} down"
         description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
 
+    - alert: service_down_flakyhost
+      expr: probe_success{instance="flakyhost.com"} < 1
+      for: 15s
+      labels:
+        severity: page
+        another_label: value
+      annotations:
+        summary: "Instance {{ $labels.instance }} down"
+        description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
